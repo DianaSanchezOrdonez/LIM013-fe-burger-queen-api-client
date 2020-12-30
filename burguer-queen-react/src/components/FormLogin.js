@@ -22,17 +22,21 @@ class FormLogin extends Component {
 
     render(){
         return(
-            <form onSubmit={this.handleSubmit}>
-                <div>
-                    <label>Correo:</label>
+            <form onSubmit={this.handleSubmit} className="row g-3" >
+                <div className="col-12">
+                    <label className='form-label'>Correo:</label>
                     <input
+                    className='form-control'
                     type='text'
                     name='email'
                     onChange={this.handleInput}
                     placeholder='Correo'
                     ></input>
-                    <label>Contraseña:</label>
+                </div>
+                <div className="col-12">
+                    <label className='form-label'>Contraseña:</label>
                     <input
+                    className='form-control'
                     type='password'
                     name='password'
                     onChange={this.handleInput}

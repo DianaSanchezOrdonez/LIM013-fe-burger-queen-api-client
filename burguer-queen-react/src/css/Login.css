@@ -1,0 +1,20 @@
+.bg {
+    background: url('../img/backgroundLogin.png');
+    height: 100vh;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.form {
+    padding: 40px;
+    margin-top: 30vh;
+    background-color: rgba(255, 255, 255, 0.3) ;
+    border-radius: 8px;
+    
+}
+.logo {
+    display: block;
+    margin: auto;
+    width: 250px;
+}
