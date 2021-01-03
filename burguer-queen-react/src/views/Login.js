@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
 
 import '../css/Login.css';
 import logo from '../img/logo.svg';
+import Input from '../components/Input.js';
 
 const baseUrl = 'http://localhost:3000';
 const cookies = new Cookies();
@@ -17,7 +18,7 @@ class Login extends Component {
         } 
     }
 
-    handleInput = async(e) => {
+    /* handleInput = async(e) => {
         await this.setState({
             form:{
                 ...this.state.form,
@@ -25,6 +26,15 @@ class Login extends Component {
             }
         });
         //console.log(this.state.form);
+    } */
+
+    handleChange = (name, value) => {
+        if(name === 'email'){
+            this.state.form.email = value;
+            //console.log('this.state.form.email', this.state.form.email);
+        }else {
+            this.state.form.password = value;
+        }
     }
 
     handleSubmit = async(e) => {
@@ -70,30 +80,35 @@ class Login extends Component {
                             <img className='logo mb-3' src={logo}></img>
                             <div className='form-group mb-3'>
                                 <label className='form-label'>Correo:</label>
-                                <input
-                                className='form-control'
-                                type='text'
-                                name='email'
-                                onChange={this.handleInput}
-                                placeholder='Correo'
-                                ></input>
+                                <Input
+                                    attribute = {{
+                                        id:'email',
+                                        name:'email',
+                                        placeholder:'Correo',
+                                        type:'text'
+                                    }}
+                                    handleChange = {this.handleChange}
+                                   
+                                ></Input>
                             </div>
                             <div className='form-group mb-3'>
                                 <label className='form-label'>Contraseña:</label>
-                                <input
-                                className='form-control'
-                                type='password'
-                                name='password'
-                                onChange={this.handleInput}
-                                placeholder='Contraseña'
-                                ></input>
+                                <Input
+                                    attribute = {{
+                                        id:'password',
+                                        name:'password',
+                                        placeholder:'Contraseña',
+                                        type:'password'
+                                    }}
+                                    handleChange = {this.handleChange}
+                                   
+                                ></Input>
                             </div>
                             <button className='col-md-12 btn btn-danger btn-block'>Ingresar</button>
                         </form>    
                     </div>
                     <div className='col-md-3 col-sm-4 col-xs-12'></div>
                 </div>
-
             </div>
            
         )
