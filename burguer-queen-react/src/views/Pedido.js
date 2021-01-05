@@ -17,7 +17,8 @@ class Pedido extends Component{
             type:'',
             options:[], 
             product:[],
-            carrito: []
+            carrito: [],
+            carritoSinDuplicados: []
         }
     }
 
@@ -43,28 +44,29 @@ class Pedido extends Component{
 
     //const result = words.filter(word => word.length > 6);
 
-    renderCarrito = () => {
-        let carritoSinDuplicados = [...new Set(this.state.carrito)];
-        //console.log('carritoSinDuplicados', carritoSinDuplicados);
-        carritoSinDuplicados.forEach(item => {
+    renderCarrito = (arr) => {
+        
+        arr.forEach(item => {
             let miItem = this.state.options.filter( itemDatabase => itemDatabase.id == item)
-            return miItem;
+            this.state.product.push(miItem);
+            return this.state.product.push(miItem);;
         })
     }
 
     handleProducts = (e) => {
-        
+     
         axios.get('http://localhost:3000/products?id='+ e.target.dataset.id)
         .then(response => {
           
             this.setState({product: response.data});
-            this.state.carrito.push(this.state.product)
-            //console.log('this.state.carrito', this.state.carrito);
-            
+            //this.setState({carrito: response.data[0].id})
+            //this.state.product.push(response.data);
+            this.state.carrito.push(response.data[0].id);
+
         })
-        //console.log('this.renderCarrito();', this.renderCarrito());
-        //this.renderCarrito();
-       
+        let carritoSinDuplicados = [...new Set(this.state.carrito)];
+        console.log('carritoSinDuplicados', carritoSinDuplicados);
+        this.renderCarrito(carritoSinDuplicados);
     }
 
     componentDidMount() {
@@ -117,12 +119,30 @@ class Pedido extends Component{
                             <h5>Pedido</h5>
                             
                             <ul id="carrito" className="list-group">
-                                {/* this.state.carrito.length > 0 ? 
-                                    this.state.carrito.map(item => {
-                                        return <ListItems key={item.id} data={item} handleProducts={this.handleProducts}></ListItems>
+
+                                {/*this.state.product.length > 0 ? 
+                                        this.state.product.map(item => { 
+                                            const filter = this.state.carrito.filter( element =>  {
+                                                return element == item.id;
+                                                
+                                            })
+                                            console.log('itemFilter', filter);
+                                            return <ListItems key={item.id} data={item} handleProducts={this.handleProducts}></ListItems>
+                                        })
+                                        : <ListItems data='0' ></ListItems>
+                                    */} 
+
+                                {
+                                    
+                                    this.state.carritoSinDuplicados.map(item => {
+                                        const filter = this.state.product.filter( el => {
+                                            return el.item == item
+                                        })
+                                        console.log('itemFilter', filter);
+                                        return <ListItems key={item.id} data={item} ></ListItems>
                                     })
-                                    : <ListItems data='0' ></ListItems>
-                                /*} 
+                                   
+                                } 
                                 {/*this.state.product.length > 0 ? <ListItems data={this.state.product}></ListItems> : <ListItems data='0' ></ListItems>*/}
                              
                             </ul>
