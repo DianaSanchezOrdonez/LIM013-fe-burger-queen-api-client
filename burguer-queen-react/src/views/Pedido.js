@@ -3,14 +3,21 @@ import Cookies from 'universal-cookie';
 import axios from 'axios';
 
 import Navigation from '../components/Navigation.js';
+import Options from '../components/Options.js';
+import ListItems from '../components/ListItems.js';
 
 const baseUrl = 'http://localhost:3000';
 const cookies = new Cookies();
 
 class Pedido extends Component{
 
-    state = {
-        type: '',
+    constructor(props){
+        super(props)
+        this.state = {
+            type:'',
+            options:[], 
+            product:[]
+        }
     }
 
     /* logOut = () => {
@@ -19,32 +26,26 @@ class Pedido extends Component{
         window.location.href = './'
     } */
 
-    filterMenu = async(e) => {
+    filterMenu = (e) => {
         let url = baseUrl + '/products';
         //console.log('e.target.name', e.target.name);
-        await axios.get(url, {params: {type: e.target.name}})
+        axios.get(url, {params: {type: e.target.name}})
         .then(response => {
-            document.querySelector('#prueba').innerHTML = '';
-           
-                response.data.forEach(element => {
-
-                document.querySelector('#prueba').innerHTML += 
-                `<div class="col-sm-6 mt-2">
-                    <div class="card">
-                        <div class="card-body">
-
-                            <h5 class="card-title">${element.name}</h5>
-                            <p class="card-text">${element.price}</p>
-                        
-                        </div>
-                    </div>
-                </div>`
-            });  
+            console.log('response.data', response.data);
+            this.setState({options: response.data})    
         })
         .catch(error => {
             console.log(error);
         })
 
+    }
+
+    handleProducts = (e) => {
+        console.log('dataset', e.target.dataset.id);
+        axios.get('http://localhost:3000/products?id='+ e.target.dataset.id)
+        .then(response => {
+            this.setState({product: response.data})
+        })
     }
 
     componentDidMount() {
@@ -66,30 +67,43 @@ class Pedido extends Component{
                         <button name='breakfast' onClick={this.filterMenu}>Desayunos</button>
                         <button name='day' onClick={this.filterMenu}> Del día</button>
                         <br/>
-                        <div id='prueba' className='row'>
-                            
+                        <div className='row'>
+                           
+                            { this.state.options.map(item => {
+                                    return <Options key={item.id} data={item} handleProducts={this.handleProducts}></Options>
+                                })
+                            } 
                         </div>
                     </div>
                     <div className='col-md-6 mt-4'>
-                        <div class="mb-3 row">
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Mesero:</label>
-                            <div class="col-sm-9">
-                            <input type="text" class="form-control"/>
+                        <div className="mb-3 row">
+                            <label htmlFor="staticEmail" className="col-sm-2 col-form-label">Mesero:</label>
+                            <div className="col-sm-9">
+                            <input type="text" className="form-control"/>
                             </div>
                         </div>
-                        <div class="mb-3 row">
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Mesa:</label>
-                            <div class="col-sm-9">
-                            <input type="text" class="form-control"/>
+                        <div className="mb-3 row">
+                            <label htmlFor="staticEmail" className="col-sm-2 col-form-label">Mesa:</label>
+                            <div className="col-sm-9">
+                            <input type="text" className="form-control"/>
                             </div>
                         </div>
-                        <div class="mb-3 row">
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Cliente:</label>
-                            <div class="col-sm-9">
-                            <input type="text" class="form-control"/>
+                        <div className="mb-3 row">
+                            <label htmlFor="staticEmail" className="col-sm-2 col-form-label">Cliente:</label>
+                            <div className="col-sm-9">
+                            <input type="text" className="form-control"/>
                             </div>
                         </div>
-                 
+                        <div className='card '>
+                            <h5>Pedido</h5>
+                            
+                            <ul id="carrito" className="list-group">
+                                <ListItems data={this.state.product}></ListItems>
+                
+                            </ul>
+                                    
+                        
+                        </div>
                     </div>
                 </div>
                

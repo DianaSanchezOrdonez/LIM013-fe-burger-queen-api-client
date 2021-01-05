@@ -37,11 +37,11 @@ class Login extends Component {
         }
     }
 
-    handleSubmit = async(e) => {
+    handleSubmit = (e) => {
         e.preventDefault(); 
-        let url = baseUrl + '/users';
-        await axios.get(url, { params: {email: this.state.form.email, password: this.state.form.password}})
-        //await axios.post(baseUrl, { email: this.state.form.email, password: this.state.form.password})
+        let url = baseUrl + '/auth';
+        axios.get(url, { params: {email: this.state.form.email, password: this.state.form.password}})
+       // axios.post(url, { email: this.state.form.email, password: this.state.form.password})
         .then(response => {
             console.log('params', this.state.form.email, this.state.form.password);
             //console.log('response', response)

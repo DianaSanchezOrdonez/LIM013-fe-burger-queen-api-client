@@ -1,64 +1,92 @@
 {
+  "auth": [
+    {
+      "email": "prueba@hotmail.com",
+      "password": "123456",
+      "id": 1
+    },
+    {
+      "email": "admin@hotmail.com",
+      "password": "admin123",
+      "id": 2
+    },
+   
+  ],
   "users": [
-      {
-          "id":1,
-          "email": "prueba@hotmail.com",
-          "password":"123456",
-          "roles": {
-            "mesero": true,
-            "cocinero": false
-          },
-          "roles.admin": false
-        },
-        {
-          "id":2,
-          "email": "admin@hotmail.com",
-          "password":"admin123",
-          "roles": {
-            "mesero": true,
-            "cocinero": false
-          },
-          "roles.admin": true
-        }
+    {
+      "id": 1,
+      "email": "prueba@hotmail.com",
+      "password": "123456",
+      "roles": {
+        "mesero": true,
+        "cocinero": false
+      },
+      "roles.admin": false
+    },
+    {
+      "id": 2,
+      "email": "admin@hotmail.com",
+      "password": "admin123",
+      "roles": {
+        "mesero": true,
+        "cocinero": false
+      },
+      "roles.admin": true
+    },
+    {
+      "email": "dianiza11@hotmail.com",
+      "password": "123456",
+      "id": 3
+    },
+    {
+      "email": "prueba@hotmail.com",
+      "password": "123456",
+      "id": 4
+    },
+    {
+      "email": "prueba@hotmail.com",
+      "password": "123456",
+      "id": 5
+    }
   ],
   "products": [
     {
-      "id":1,
-      "name":"Café americano",
-      "price":"5.00",
-      "image":"https://1.bp.blogspot.com/-pNVLQF44npc/WBfTRTaX5aI/AAAAAAAABV0/ZlwkeqVgJfM8D0REy7saXk8lYA_AkCTWgCLcB/s400/cesar-hinojosa-quiroz-caf%25C3%25A9-am%25C3%25A9ricano.jpg",
+      "id": 1,
+      "name": "Café americano",
+      "price": "5.00",
+      "image": "https://1.bp.blogspot.com/-pNVLQF44npc/WBfTRTaX5aI/AAAAAAAABV0/ZlwkeqVgJfM8D0REy7saXk8lYA_AkCTWgCLcB/s400/cesar-hinojosa-quiroz-caf%25C3%25A9-am%25C3%25A9ricano.jpg",
       "type": "breakfast",
       "categoria": null
     },
     {
-      "id":2,
-      "name":"Café con leche",
-      "price":"7.00",
-      "image":"https://1.bp.blogspot.com/-pNVLQF44npc/WBfTRTaX5aI/AAAAAAAABV0/ZlwkeqVgJfM8D0REy7saXk8lYA_AkCTWgCLcB/s400/cesar-hinojosa-quiroz-caf%25C3%25A9-am%25C3%25A9ricano.jpg",
+      "id": 2,
+      "name": "Café con leche",
+      "price": "7.00",
+      "image": "https://1.bp.blogspot.com/-pNVLQF44npc/WBfTRTaX5aI/AAAAAAAABV0/ZlwkeqVgJfM8D0REy7saXk8lYA_AkCTWgCLcB/s400/cesar-hinojosa-quiroz-caf%25C3%25A9-am%25C3%25A9ricano.jpg",
       "type": "breakfast",
       "categoria": null
     },
     {
-      "id":3,
-      "name":"Sandwich de jamón y queso",
-      "price":"10.00",
-      "image":"https://1.bp.blogspot.com/-pNVLQF44npc/WBfTRTaX5aI/AAAAAAAABV0/ZlwkeqVgJfM8D0REy7saXk8lYA_AkCTWgCLcB/s400/cesar-hinojosa-quiroz-caf%25C3%25A9-am%25C3%25A9ricano.jpg",
+      "id": 3,
+      "name": "Sandwich de jamón y queso",
+      "price": "10.00",
+      "image": "https://1.bp.blogspot.com/-pNVLQF44npc/WBfTRTaX5aI/AAAAAAAABV0/ZlwkeqVgJfM8D0REy7saXk8lYA_AkCTWgCLcB/s400/cesar-hinojosa-quiroz-caf%25C3%25A9-am%25C3%25A9ricano.jpg",
       "type": "breakfast",
       "categoria": null
     },
     {
-      "id":4,
-      "name":"Jugo de frutas natural",
-      "price":"7.00",
-      "image":"https://1.bp.blogspot.com/-pNVLQF44npc/WBfTRTaX5aI/AAAAAAAABV0/ZlwkeqVgJfM8D0REy7saXk8lYA_AkCTWgCLcB/s400/cesar-hinojosa-quiroz-caf%25C3%25A9-am%25C3%25A9ricano.jpg",
+      "id": 4,
+      "name": "Jugo de frutas natural",
+      "price": "7.00",
+      "image": "https://1.bp.blogspot.com/-pNVLQF44npc/WBfTRTaX5aI/AAAAAAAABV0/ZlwkeqVgJfM8D0REy7saXk8lYA_AkCTWgCLcB/s400/cesar-hinojosa-quiroz-caf%25C3%25A9-am%25C3%25A9ricano.jpg",
       "type": "breakfast",
       "categoria": null
     },
     {
-      "id":5,
-      "name":"Hamburguesa simple",
-      "price":"10.00",
-      "image":"https://1.bp.blogspot.com/-pNVLQF44npc/WBfTRTaX5aI/AAAAAAAABV0/ZlwkeqVgJfM8D0REy7saXk8lYA_AkCTWgCLcB/s400/cesar-hinojosa-quiroz-caf%25C3%25A9-am%25C3%25A9ricano.jpg",
+      "id": 5,
+      "name": "Hamburguesa simple",
+      "price": "10.00",
+      "image": "https://1.bp.blogspot.com/-pNVLQF44npc/WBfTRTaX5aI/AAAAAAAABV0/ZlwkeqVgJfM8D0REy7saXk8lYA_AkCTWgCLcB/s400/cesar-hinojosa-quiroz-caf%25C3%25A9-am%25C3%25A9ricano.jpg",
       "type": "day",
       "categoria": "Hmaburguesas"
     }

@@ -1,29 +1,22 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 
-const baseUrl = 'http://localhost:3000';
+import axios from 'axios';
 
 class Options extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            data: []
-        }
-    }
-    
     render(){
-        return(
-            <div className="col-sm-6 mt-2">
-                <div className="card">
-                    <div className="card-body">
 
-                        <h5 className="card-title">{this.state.name}</h5>
-                        <p className="card-text">{this.state.price}</p>
-                      
-                    </div>
-                </div>
+        return(
+            
+            <div className="col-sm-6 mt-2" onClick={this.props.handleProducts} >
+                <div className="card" >
+                        <div className="card-body"  >
+                            <h5 className="card-title" data-id={this.props.data.id}>{this.props.data.name}</h5>
+                            <p className="card-text">{this.props.data.price}</p>
+                        </div>
+                </div>                 
             </div>
+           
         )
     }
 }
