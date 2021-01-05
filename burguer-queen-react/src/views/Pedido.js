@@ -16,7 +16,8 @@ class Pedido extends Component{
         this.state = {
             type:'',
             options:[], 
-            product:[]
+            product:[],
+            carrito: []
         }
     }
 
@@ -31,7 +32,7 @@ class Pedido extends Component{
         //console.log('e.target.name', e.target.name);
         axios.get(url, {params: {type: e.target.name}})
         .then(response => {
-            console.log('response.data', response.data);
+            //console.log('response.data', response.data);
             this.setState({options: response.data})    
         })
         .catch(error => {
@@ -40,12 +41,30 @@ class Pedido extends Component{
 
     }
 
+    //const result = words.filter(word => word.length > 6);
+
+    renderCarrito = () => {
+        let carritoSinDuplicados = [...new Set(this.state.carrito)];
+        //console.log('carritoSinDuplicados', carritoSinDuplicados);
+        carritoSinDuplicados.forEach(item => {
+            let miItem = this.state.options.filter( itemDatabase => itemDatabase.id == item)
+            return miItem;
+        })
+    }
+
     handleProducts = (e) => {
-        console.log('dataset', e.target.dataset.id);
+        
         axios.get('http://localhost:3000/products?id='+ e.target.dataset.id)
         .then(response => {
-            this.setState({product: response.data})
+          
+            this.setState({product: response.data});
+            this.state.carrito.push(this.state.product)
+            //console.log('this.state.carrito', this.state.carrito);
+            
         })
+        //console.log('this.renderCarrito();', this.renderCarrito());
+        //this.renderCarrito();
+       
     }
 
     componentDidMount() {
@@ -98,8 +117,14 @@ class Pedido extends Component{
                             <h5>Pedido</h5>
                             
                             <ul id="carrito" className="list-group">
-                                <ListItems data={this.state.product}></ListItems>
-                
+                                {/* this.state.carrito.length > 0 ? 
+                                    this.state.carrito.map(item => {
+                                        return <ListItems key={item.id} data={item} handleProducts={this.handleProducts}></ListItems>
+                                    })
+                                    : <ListItems data='0' ></ListItems>
+                                /*} 
+                                {/*this.state.product.length > 0 ? <ListItems data={this.state.product}></ListItems> : <ListItems data='0' ></ListItems>*/}
+                             
                             </ul>
                                     
                         
