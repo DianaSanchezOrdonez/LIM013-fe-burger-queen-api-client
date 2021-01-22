@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { trackPromise } from "react-promise-tracker";
 import "../ChefPending/ChefPending.css";
 
 import Nav from "../commons/Nav/Nav.js";
@@ -10,11 +11,13 @@ const ChefPending = () => {
   const [arrayOrders, setArrayOrders] = useState([]);
 
   useEffect(() => {
-    getAllOrders()
-      .then((data) => {
-        return setArrayOrders(data);
-      })
-      .catch((err) => console.log(err));
+    trackPromise(
+      getAllOrders()
+        .then((data) => {
+          return setArrayOrders(data);
+        })
+        .catch((err) => console.log(err))
+    );
   }, []);
 
   const arrayPending = arrayOrders.filter((el) => {
@@ -22,7 +25,6 @@ const ChefPending = () => {
   });
 
   const modifyOrder = (idOrden) => {
-
     const uniqueOrder = arrayPending.filter((el) => {
       return el._id === idOrden;
     });

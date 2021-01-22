@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { trackPromise } from "react-promise-tracker";
 import '../ChefPending/ChefPending.css';
 import Nav from '../commons/Nav/Nav.js';
 import Card from '../../pages/commons/Card/components/Card.js';
@@ -9,12 +10,13 @@ const ChefDelivering = () => {
   const [arrayOrders, setArrayOrders] = useState([]);
 
   useEffect(() => {
-
-    getAllOrders()
-      .then((data) => {
-        return setArrayOrders(data);
-      })
-      .catch((err) => console.log(err));
+    trackPromise(
+      getAllOrders()
+        .then((data) => {
+          return setArrayOrders(data);
+        })
+        .catch((err) => console.log(err))
+    );
   }, []);
 
   const arrayDelivering = arrayOrders.filter((el) => {

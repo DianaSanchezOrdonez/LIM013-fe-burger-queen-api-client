@@ -1,5 +1,6 @@
 import React, { useEffect, useState} from 'react';
 import { trackPromise} from 'react-promise-tracker'; /* TRACK PROMISE */
+import Swal from 'sweetalert2'
 import '../Home/Home.css';
 import Label from './components/Label/Label';
 import Input from './components/Input/Input';
@@ -17,8 +18,8 @@ const Home = () => {
 
     /* productData es un array que contiene objetos (cada producto), por eso se le puede hacer map */
     const [orderArray, setOrderArray] = useState([]);
-    const [client, setClient] = useState();
-   /*  const [numberTable, setNumberTable] = useState(); */
+    let [client, setClient] = useState();
+    let [numberTable, setNumberTable] = useState();
     
     /* acá pasar el estado (objeto) como parámetro  */
     const [allProducts, setAllProducts] = useState([]);
@@ -61,16 +62,25 @@ const Home = () => {
         client: client,
         products: products
     };
+        Swal.fire({
+            title: 'Orden Enviada',
+            html: `Cliente: ${client} | N° mesa: ${numberTable}`,
+            icon: 'success',
+            width: '60%',
+            confirmButtonColor:' #5E9732'
+        })
+        setOrderArray([]);
         return createOrder("null", body);
     };
+
     const handleInput = (name, value) => {
         switch (name){
             default: console.log("falta completar");
             break;
             case 'client': setClient(value);
             break;
-            /* case 'numberTable': setNumberTable(value);
-            break; */
+            case 'numberTable': setNumberTable(value);
+            break;
         }
     }
 
@@ -83,15 +93,6 @@ const Home = () => {
             
             switch (targetClassName) {
                 default:
-                    /* SE REPITE: 
-                    nueva fx (
-                        params: product (objeto. el producto en específico, que ya lo buscamos x id), 
-                            )
-                        product.qty++;
-                        product.total=0;
-                        setOrderArray
-                    Retorna: set producto    
-                     */
                     if (orderArray.filter(el => el._id === productId).length > 0) {
                         product.qty++;
                         product.total=0;
@@ -118,7 +119,13 @@ const Home = () => {
                                 const orderList = [...new Set(orderArray)]; 
                                 return setOrderArray(orderList)
                             }else{
-                                alert('No puede ser negativo...');
+                                Swal.fire({
+                                    title: 'Ten cuidado',
+                                    text: 'La cantidad no puede ser menor a 1',
+                                    icon: 'warning',
+                                    width: '60%',
+                                    confirmButtonColor: '#D48000'
+                                })
                                 product.qty = 0;
                                 //return setOrderArray(orderList)
                             }
@@ -179,13 +186,24 @@ const Home = () => {
                             
                             <div className="row space-center">
                                 <Label text="Mesa:" />
-                                <Input attribute={{
+                                {/* <Input attribute={{
                                     id: 'numberTable', 
                                     name: 'numberTable',
                                     type: 'text',
                                     placeholder: 'Mesa',
-                                }}
-                                handleInput={handleInput} />
+                                }} */}
+                                <select className="input-order" name="numberTable" onClick={(e) => handleInput(e.target.name, e.target.value)}>
+                                    <option value="01">01</option>
+                                    <option value="02">02</option>
+                                    <option value="03">03</option>
+                                    <option value="04">04</option>
+                                    <option value="05">05</option>
+                                    <option value="06">06</option>
+                                    <option value="07">07</option>
+                                    <option value="08">08</option>
+                                    <option value="09">09</option>
+                                    <option value="10">10</option>
+                                </select>
                             </div>
 
                             <div className="row space-center">
